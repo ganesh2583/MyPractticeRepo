@@ -54,10 +54,27 @@ public class DataBaseConnector {
 	}
 	
 	
-	public void createComment(Comments comment) throws Exception {
-		String addCommentSQLString = "INSERT INTO COMMENTS VALUES(" + comment.getCommentId() + "," + comment.getCommentMessage()
-				+ "," + comment.getCommentMessage() + ")";
+	public Comments createComment(Comments comment) throws Exception {
+		String addCommentSQLString = "INSERT INTO COMMENTS(COMMENT_MESSAGE,COMMENT_AUTHOR,RECEIPE_ID) VALUES(\'"+ comment.getCommentMessage()
+				+ "\',\'" + comment.getAuthor() + "\'," + comment.getReceipeId() + ")";
 		DerbyConnector.executeUpdate(addCommentSQLString);
+		return comment;
+	}
+	
+	public void deleteComment(int commentId) throws Exception{
+		String addCommentSQLString = "DELETE FROM COMMENTS WHERE  COMMENT_ID = " + commentId ;
+		DerbyConnector.executeUpdate(addCommentSQLString);
+	}
+	
+	public HashMap<String, Comments> getAllCommentsForAReceipe(int receipeId) throws Exception{
+		String getAllCommentsForAReceipeId = "SELECT * from COMMENTS WHERE RECEIPE_ID = " + receipeId  ;
+		ResultSet commentsResultSet = DerbyConnector.executeQuery(getAllCommentsForAReceipeId);
+		HashMap<String,Comments> allCommentsForAReceipeMap = new HashMap<String,Comments>();
+		while(commentsResultSet.next()){
+			Comments commentsObj = new Comments(commentsResultSet.getInt("COMMENT_ID"), commentsResultSet.getString("COMMENT_MESSAGE"), commentsResultSet.getString("COMMENT_AUTHOR"), commentsResultSet.getInt("RECEIPE_ID"));
+			allCommentsForAReceipeMap.put(new Integer(commentsObj.getReceipeId()).toString(), commentsObj);
+		}
+		return allCommentsForAReceipeMap;
 	}
 
 }

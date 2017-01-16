@@ -14,6 +14,7 @@ public class Comments {
 	private int commentId;
 	private String author;
 	private String commentMessage;
+	private int receipeId;
 	private static AtomicInteger ID_GENERATOR = new AtomicInteger(0);
 	
 	public Comments(){
@@ -26,10 +27,11 @@ public class Comments {
 	 * @param author
 	 * @param commentMessage
 	 */
-	public Comments(int commentId, String author, String commentMessage) {
+	public Comments(int commentId, String author, String commentMessage,int receipeId) {
 		this.commentId = ID_GENERATOR.getAndIncrement();
 		this.author = author;
 		this.commentMessage = commentMessage;
+		this.receipeId = receipeId;
 	}
 
 
@@ -68,6 +70,22 @@ public class Comments {
 	 */
 	public void setCommentMessage(String commentMessage) {
 		this.commentMessage = commentMessage;
+	}
+
+
+	/**
+	 * @return the receipeId
+	 */
+	public int getReceipeId() {
+		return receipeId;
+	}
+
+
+	/**
+	 * @param receipeId the receipeId to set
+	 */
+	public void setReceipeId(int receipeId) {
+		this.receipeId = receipeId;
 	}
 	
 

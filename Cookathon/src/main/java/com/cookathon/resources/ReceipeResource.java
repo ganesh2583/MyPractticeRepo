@@ -15,6 +15,8 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONObject;
+
 import com.cookathon.model.Receipes;
 import com.cookathon.resources.beans.MessageFilterBeans;
 import com.cookathon.services.ReceipeService;
@@ -22,7 +24,7 @@ import com.cookathon.services.ReceipeService;
 @Path("/receipes")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class ReceipeResource extends Application{
+public class ReceipeResource extends Application {
 	
 	ReceipeService receipeService = new ReceipeService();
 
@@ -36,7 +38,13 @@ public class ReceipeResource extends Application{
 			}
 			return Response.ok(receipesList, MediaType.APPLICATION_JSON).build();
 		}
-		return Response.ok(receipeService.getAllReceipes(), MediaType.APPLICATION_JSON).build();
+		return Response.ok(receipeService.getAllReceipes()).build();
+	}
+	
+	@GET
+	@Path("/{receipeId}")
+	public Response getReceipe(@PathParam("receipeId") int receipeId) throws Exception{
+		return Response.ok(receipeService.getAllReceipes().get(receipeId)).build();
 	}
 	
 	@POST
@@ -58,6 +66,12 @@ public class ReceipeResource extends Application{
 		receipeService.deleteReceie(receipeId);
 		return Response.ok().build();
 		
+	}
+	
+	
+	@Path("/{receipeId}/comments")
+	public CommentsResource getComments(){
+		return new CommentsResource();
 	}
 	
 }
