@@ -23,7 +23,6 @@ public class Receipes {
 	private String receipeImages;
 	private Date createdDate;
 	private ArrayList<Comments> comments;
-	private static AtomicInteger ID_GENERATOR = new AtomicInteger(0);
 	
 	public Receipes(){
 		
@@ -41,10 +40,35 @@ public class Receipes {
 	 * @param receipeImages
 	 * @param comments
 	 * 
-	 */
+	 *//*
 	public Receipes(String author, String receipeTitle, String receipeDescription, String receipeIngredients,
 			String receipePreparation, String receipeImages, ArrayList<Comments> comments) {
-		this.receipeId = ID_GENERATOR.getAndIncrement();
+		this.author = author;
+		this.receipeTitle = receipeTitle;
+		this.receipeDescription = receipeDescription;
+		this.receipeIngredients = receipeIngredients;
+		this.receipePreparation = receipePreparation;
+		this.receipeImages = receipeImages;
+		this.createdDate = new Date();
+		this.comments = comments;
+	}*/
+	
+	/**
+	 * 
+	 * Parameterized constructor used to create a Receipe Object
+	 * 
+	 * @param author
+	 * @param receipeTitle
+	 * @param receipeDescription
+	 * @param receipeIngredients
+	 * @param receipePreparation
+	 * @param receipeImages
+	 * @param comments
+	 * 
+	 */
+	public Receipes(int receipeId, String author, String receipeTitle, String receipeDescription, String receipeIngredients,
+			String receipePreparation, String receipeImages, ArrayList<Comments> comments) {
+		this.receipeId = receipeId;
 		this.author = author;
 		this.receipeTitle = receipeTitle;
 		this.receipeDescription = receipeDescription;
@@ -165,5 +189,20 @@ public class Receipes {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
+	
+	@Override
+	public String toString() {
+		String receipeString = "Receipe obj: id = "+this.getReceipeId() +
+		" author : "+this.getAuthor() +
+		" comments : "+this.getComments() +
+		" date of creation : "+this.getCreatedDate() +
+		" description : "+this.getReceipeDescription() +
+		" images : "+this.getReceipeImages() +
+		" ingredients : "+this.getReceipeIngredients() +
+		" preparation : "+this.getReceipePreparation() +
+		" title : "+this.getReceipeTitle();
+		return receipeString;
+	}
 
 }
+ 

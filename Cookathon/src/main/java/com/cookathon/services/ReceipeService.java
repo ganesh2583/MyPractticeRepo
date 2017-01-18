@@ -37,6 +37,11 @@ public class ReceipeService {
 		return receipesList;
 	}
 	
+	public HashMap<String,Receipes> getAllReceipesMap() throws Exception{
+		HashMap<String,Receipes> allReceipes = doa.getAllReceipes();
+		return allReceipes;
+	}
+	
 	public Receipes updateReceipe(Receipes receipe) throws Exception{
 		return doa.updateReceipe(receipe);
 	}

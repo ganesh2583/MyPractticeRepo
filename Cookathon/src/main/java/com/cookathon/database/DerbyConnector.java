@@ -22,6 +22,7 @@ public class DerbyConnector {
 					+ "COMMENT_AUTHOR VARCHAR(10000) NOT NULL, "
 			+ "PRIMARY KEY(COMMENT_ID))";
 	public static final String RECEIPE_TABLE_CONTENTS = "SELECT * FROM RECEIPES";
+	public static final String COMMENTS_TABLE_CONTENTS = "SELECT * FROM COMMENTS WHERE RECEIPE_ID = 0";
 	public static Connection connect = null;
 	public static Statement statement = null;
 	public static PreparedStatement ps = null ;
@@ -75,14 +76,22 @@ public class DerbyConnector {
     }
 
     public static void main(String[] args) throws Exception {
-    	 ResultSet rs = executeQuery(RECEIPE_TABLE_CONTENTS);
+    	 ResultSet rs = executeQuery(COMMENTS_TABLE_CONTENTS);
     	 ResultSetMetaData rsmd = rs.getMetaData();
     	 int columnCount = rsmd.getColumnCount();
-	    	for (int i = 1; i <= columnCount; i++ ) {
+	    	/*for (int i = 1; i <= columnCount; i++ ) {
 	    	  String name = rsmd.getColumnName(i);
 	    	  System.out.println("Column names: "+name);
-	    	}
+	    	}*/
+    	 while (rs.next()) {
+    	       for (int i = 1; i <= columnCount; i++) {
+    	           if (i > 1) System.out.print(",  ");
+    	           String columnValue = rs.getString(i);
+    	           System.out.print(columnValue + " " + rsmd.getColumnName(i));
+    	       }
+    	       System.out.println("");
     	//createTables();
+    }
     }
 
 }

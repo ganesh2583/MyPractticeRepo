@@ -15,8 +15,6 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.json.JSONObject;
-
 import com.cookathon.model.Receipes;
 import com.cookathon.resources.beans.MessageFilterBeans;
 import com.cookathon.services.ReceipeService;
@@ -44,7 +42,7 @@ public class ReceipeResource extends Application {
 	@GET
 	@Path("/{receipeId}")
 	public Response getReceipe(@PathParam("receipeId") int receipeId) throws Exception{
-		return Response.ok(receipeService.getAllReceipes().get(receipeId)).build();
+		return Response.ok(receipeService.getAllReceipesMap().get(new Integer(receipeId).toString())).build();
 	}
 	
 	@POST

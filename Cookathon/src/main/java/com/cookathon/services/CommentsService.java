@@ -2,9 +2,7 @@ package com.cookathon.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import com.cookathon.dao.DataBaseConnector;
 import com.cookathon.model.Comments;
@@ -25,13 +23,8 @@ public class CommentsService {
 	}
 	
 	public List<Comments> getComments(int receipeId) throws Exception{
-		ArrayList<Comments> commentsList = new ArrayList<Comments>();
-		HashMap<String,Comments> allCommentsForThisReceipe = doa.getAllCommentsForAReceipe(receipeId);
-		Set<String> allCommentsKeySet = allCommentsForThisReceipe.keySet();
-		Iterator<String> keySetItr = allCommentsKeySet.iterator();
-		while(keySetItr.hasNext()){
-			commentsList.add(allCommentsForThisReceipe.get(keySetItr.next()));
-		}
+		HashMap<String,ArrayList<Comments>> allCommentsForThisReceipe = doa.getAllCommentsForAReceipe(receipeId);
+		ArrayList commentsList = allCommentsForThisReceipe.get(new Integer(receipeId).toString());
 		return commentsList;
 	}
 	

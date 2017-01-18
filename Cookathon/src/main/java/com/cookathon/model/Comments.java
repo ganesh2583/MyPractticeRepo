@@ -1,7 +1,5 @@
 package com.cookathon.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * 
  * This is a bean class to represent Comments for an recipe
@@ -15,7 +13,6 @@ public class Comments {
 	private String author;
 	private String commentMessage;
 	private int receipeId;
-	private static AtomicInteger ID_GENERATOR = new AtomicInteger(0);
 	
 	public Comments(){
 		
@@ -28,7 +25,7 @@ public class Comments {
 	 * @param commentMessage
 	 */
 	public Comments(int commentId, String author, String commentMessage,int receipeId) {
-		this.commentId = ID_GENERATOR.getAndIncrement();
+		this.commentId = commentId;
 		this.author = author;
 		this.commentMessage = commentMessage;
 		this.receipeId = receipeId;
@@ -88,5 +85,9 @@ public class Comments {
 		this.receipeId = receipeId;
 	}
 	
-
+	@Override
+	public String toString() {
+		String commentsString = "comment id : "+this.getCommentId()+ " comment author: "+this.getAuthor() + " comment message : "+this.getCommentMessage() + " comment receipe Id :"+this.getReceipeId();
+		return commentsString;
+	}
 }
