@@ -1,5 +1,8 @@
 package com.cookathon.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * This is a bean class to represent Comments for an recipe
@@ -13,6 +16,7 @@ public class Comments {
 	private String author;
 	private String commentMessage;
 	private int receipeId;
+	private List<Links> linksList = new ArrayList<Links>();
 	
 	public Comments(){
 		
@@ -89,5 +93,12 @@ public class Comments {
 	public String toString() {
 		String commentsString = "comment id : "+this.getCommentId()+ " comment author: "+this.getAuthor() + " comment message : "+this.getCommentMessage() + " comment receipe Id :"+this.getReceipeId();
 		return commentsString;
+	}
+	
+	public void addLinks(String url,String relation){
+		Links links = new Links();
+		links.setLink(url);
+		links.setRel(relation);
+		linksList.add(links);
 	}
 }

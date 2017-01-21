@@ -2,7 +2,9 @@ package com.cookathon.model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.List;
+
+
 
 /**
  * 
@@ -23,6 +25,7 @@ public class Receipes {
 	private String receipeImages;
 	private Date createdDate;
 	private ArrayList<Comments> comments;
+	private List<Links> linksList  = new ArrayList<Links>();
 	
 	public Receipes(){
 		
@@ -202,6 +205,13 @@ public class Receipes {
 		" preparation : "+this.getReceipePreparation() +
 		" title : "+this.getReceipeTitle();
 		return receipeString;
+	}
+	
+	public void addLinks(String url,String rel){
+		Links links = new Links();
+		links.setLink(url);
+		links.setRel(rel);
+		linksList.add(links);
 	}
 
 }

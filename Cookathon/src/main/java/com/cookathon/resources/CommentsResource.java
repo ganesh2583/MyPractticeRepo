@@ -8,8 +8,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import com.cookathon.model.Comments;
 import com.cookathon.services.CommentsService;
@@ -28,8 +30,10 @@ public class CommentsResource extends Application{
 	
 	
 	@POST
-	public Response addComment(@PathParam("receipeId") int receipeId, Comments comment) throws Exception {
+	public Response addComment(@PathParam("receipeId") int receipeId, Comments comment,@Context UriInfo uriInfo) throws Exception {
 		comment.setReceipeId(receipeId);
+		String absoluteURL = uriInfo.getAbsolutePath().toString();
+		comment.addLinks(absoluteURL, "self");
 		return Response.ok(commentsService.createComment(comment)).build();
 	}
 	

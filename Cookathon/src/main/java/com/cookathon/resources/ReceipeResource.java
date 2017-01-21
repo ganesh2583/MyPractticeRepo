@@ -12,8 +12,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import com.cookathon.model.Receipes;
 import com.cookathon.resources.beans.MessageFilterBeans;
@@ -41,20 +43,27 @@ public class ReceipeResource extends Application {
 	
 	@GET
 	@Path("/{receipeId}")
-	public Response getReceipe(@PathParam("receipeId") int receipeId) throws Exception{
-		return Response.ok(receipeService.getAllReceipesMap().get(new Integer(receipeId).toString())).build();
+	public Response getReceipe(@PathParam("receipeId") int receipeId,@Context UriInfo uriInfo) throws Exception{
+		String absuolutePath = uriInfo.getAbsolutePath().getPath();
+		Receipes reciepeItem = receipeService.getAllReceipesMap().get(new Integer(receipeId).toString());
+		reciepeItem.addLinks(absuolutePath, "self");
+		return Response.ok(reciepeItem).build();
 	}
 	
 	@POST
-	public Response createReceipe(Receipes receipe) throws Exception{
+	public Response createReceipe(Receipes receipe,@Context UriInfo uriInfo) throws Exception{
+		String absuolutePath = uriInfo.getAbsolutePath().getPath();
 		Receipes createReceipe = receipeService.createReceipe(receipe);
-		return Response.accepted(createReceipe).build();
+		createReceipe.addLinks(absuolutePath, "self");
+		return Response.created(uriInfo.getAbsolutePath()).entity(createReceipe).build();
 	}
 	
 	@PUT
 	@Path("/{receipeId}")
-	public Response updateReceipe(Receipes receipe) throws Exception{
+	public Response updateReceipe(Receipes receipe,@Context UriInfo uriInfo) throws Exception{
+		String absuolutePath = uriInfo.getAbsolutePath().getPath();
 		Receipes updatedReceipe = receipeService.updateReceipe(receipe);
+		updatedReceipe.addLinks(absuolutePath, "self");
 		return Response.accepted(updatedReceipe).build();
 	}
 	
