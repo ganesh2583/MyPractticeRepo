@@ -21,18 +21,28 @@ import com.cookathon.model.Receipes;
 import com.cookathon.resources.beans.MessageFilterBeans;
 import com.cookathon.services.ReceipeService;
 
+/**
+ * 
+ * {"receipeId":0,"author":"Ganesh","receipeTitle":"Ragi
+ * Sankati","receipeDescription":"Clasic Rayalaseema
+ * dish","receipeIngredients":"Ragi and
+ * Rice","receipePreparation":"Cook","receipeImages":null,"createdDate":"2017-01-15","comments":null}
+ * 
+ * @author Ganesh
+ *
+ */
 @Path("/receipes")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ReceipeResource extends Application {
-	
+
 	ReceipeService receipeService = new ReceipeService();
 
 	@GET
-	public Response getAllReceipes(@BeanParam MessageFilterBeans messageFilterBeans) throws Exception{
-		ArrayList receipesList =null;
-		if(messageFilterBeans.getSize() != 0){
-			for(int i=0;i<messageFilterBeans.getSize();i++){
+	public Response getAllReceipes(@BeanParam MessageFilterBeans messageFilterBeans) throws Exception {
+		ArrayList receipesList = null;
+		if (messageFilterBeans.getSize() != 0) {
+			for (int i = 0; i < messageFilterBeans.getSize(); i++) {
 				receipesList = new ArrayList();
 				receipesList.add(receipeService.getAllReceipes().get(i));
 			}
@@ -40,45 +50,44 @@ public class ReceipeResource extends Application {
 		}
 		return Response.ok(receipeService.getAllReceipes()).build();
 	}
-	
+
 	@GET
 	@Path("/{receipeId}")
-	public Response getReceipe(@PathParam("receipeId") int receipeId,@Context UriInfo uriInfo) throws Exception{
+	public Response getReceipe(@PathParam("receipeId") int receipeId, @Context UriInfo uriInfo) throws Exception {
 		String absuolutePath = uriInfo.getAbsolutePath().getPath();
 		Receipes reciepeItem = receipeService.getAllReceipesMap().get(new Integer(receipeId).toString());
 		reciepeItem.addLinks(absuolutePath, "self");
 		return Response.ok(reciepeItem).build();
 	}
-	
+
 	@POST
-	public Response createReceipe(Receipes receipe,@Context UriInfo uriInfo) throws Exception{
+	public Response createReceipe(Receipes receipe, @Context UriInfo uriInfo) throws Exception {
 		String absuolutePath = uriInfo.getAbsolutePath().getPath();
 		Receipes createReceipe = receipeService.createReceipe(receipe);
 		createReceipe.addLinks(absuolutePath, "self");
 		return Response.created(uriInfo.getAbsolutePath()).entity(createReceipe).build();
 	}
-	
+
 	@PUT
 	@Path("/{receipeId}")
-	public Response updateReceipe(Receipes receipe,@Context UriInfo uriInfo) throws Exception{
+	public Response updateReceipe(Receipes receipe, @Context UriInfo uriInfo) throws Exception {
 		String absuolutePath = uriInfo.getAbsolutePath().getPath();
 		Receipes updatedReceipe = receipeService.updateReceipe(receipe);
 		updatedReceipe.addLinks(absuolutePath, "self");
 		return Response.accepted(updatedReceipe).build();
 	}
-	
+
 	@DELETE
 	@Path("/{receipeId}")
-	public Response deleteReceipe(@PathParam("receipeId") int receipeId) throws Exception{
+	public Response deleteReceipe(@PathParam("receipeId") int receipeId) throws Exception {
 		receipeService.deleteReceie(receipeId);
 		return Response.ok().build();
-		
+
 	}
-	
-	
+
 	@Path("/{receipeId}/comments")
-	public CommentsResource getComments(){
+	public CommentsResource getComments() {
 		return new CommentsResource();
 	}
-	
+
 }

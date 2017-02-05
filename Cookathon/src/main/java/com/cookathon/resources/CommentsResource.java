@@ -16,6 +16,18 @@ import javax.ws.rs.core.UriInfo;
 import com.cookathon.model.Comments;
 import com.cookathon.services.CommentsService;
 
+
+/**
+ * {
+  "commentId": 0,
+  "author": "Test 2",
+  "commentMessage": "Great Dish!! Awesome",
+  "receipeId": 0
+}
+
+ * @author Ganesh
+ *
+ */
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)

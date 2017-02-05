@@ -3,56 +3,90 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cookathon</title>
-<link rel="stylesheet" href="../bootstrapFiles/css/bootstrap.min.css">
-<link rel="stylesheet" href="../bootstrapFiles/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/Cookathon/bootstrapFiles/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Cookathon/bootstrapFiles/css/bootstrap-theme.min.css">
 </head>
 <body>
 <!-- <button class="btm btn-success" onclick="$(this).hide();">Click me</button> -->
 <div class="container">
 	<div class="row">
-		<div class="col-lg-1 col-xs-4 bg-warning">
-			1
+		<div class="col-xs-12">
+		
+		<div id="my-slider" class="carousel slide" data-ride="carousel">
+			<!-- indicators  dot nov-->
+			<ol class="carousel-indicators">
+				<li data-target="#my-slider" data-slide-to="0" class="active">
+					<!-- <span></span> -->
+				</li>
+				<li data-target="#my-slider" data-slide-to="1"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active" style="width:640px; height:360px;">
+					<img src="/Cookathon/images/chicken.jpg" alt="chicken" />
+					<div class="carousel-caption">
+						<h1>Chicken</h1>
+					</div>
+				</div>
+				<div class="item" style="width:640px; height:360px;">
+					<img src="/Cookathon/images/chicken_wine.jpg" alt="chicken_wine" />
+					<div class="carousel-caption">
+						<h1>Chicken and Wines</h1>
+					</div>
+				</div>
+			</div>
+			<!-- controls or next and previos buttons -->
+			<a class="left carousel-control" href="#my-slider" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			</a>
+				<a class="right carousel-control" href="#my-slider" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				</a>
+			</a>
 		</div>
-		<div class="col-lg-1 col-xs-4 bg-success">
-			2
-		</div>
-		<div class="col-lg-1 col-xs-4 bg-danger">
-			3
-		</div>
-		<div class="col-lg-1 col-xs-4 bg-info">
-			4
-		</div>
-		<div class="col-lg-1 col-xs-4 bg-warning">
-			5
-		</div>
-		<div class="col-lg-1 col-xs-4 bg-success">
-			6
-		</div>
-		<div class="col-lg-1 col-xs-4 bg-danger">
-			7
-		</div>
-		<div class="col-lg-1 col-xs-4 bg-info">
-			8
-		</div>
-		<div class="col-lg-1 col-xs-4 bg-warning">
-			9
-		</div>
-		<div class="col-lg-1 col-xs-4 bg-success">
-			10
-		</div>
-		<div class="col-lg-1 col-xs-4 bg-danger">
-			11
-		</div>
-		<div class="col-lg-1 col-xs-4 bg-info">
-			12
 		</div>
 	</div>
-
+		
+		
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>Add you Receipe Hee!!!</h2>
+				<form class="form" data-bind="submit: addReceipe">
+					<div class="form-group">
+						<label for="receipeAuthor">Name: </label>
+						<input type="text" name="receipeAuthor" class="form-control" id="receipeAuthor" data-bind="value : author" />
+					</div>
+					<div class="form-group">
+						<label for="receipeTitle">Title of the Receipe: </label>
+						<input type="text" name="receipeTitle" class="form-control" id="receipeTitle" data-bind="value : receipeTitle" />
+					</div>
+					<div class="form-group">
+						<label for="receipeDescription">Description: </label>
+						<input type="text" name="receipeDescription" class="form-control" id="receipeDescription" data-bind="value : receipeDescription" />
+					</div>
+					<div class="form-group">
+						<label for="receipeIngredients">Ingredients: </label>
+						<textarea name="receipeIngredients" class="form-control" rows="5" id="receipeIngredients" data-bind="value : receipeIngredients"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="receipePreparation">Preparation: </label>
+						<textarea name="receipePreparation" class="form-control" rows="5" id="receipePreparation" data-bind="value : receipePreparation"></textarea>
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-default bg-success" value="Add Your Receipe" id="receipeSubmit">
+					</div>
+				</form>
+		</div>
+	</div>
 </div>
 
-<script type="text/javascript" src="../bootstrapFiles/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../bootstrapFiles/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="../knockoutJSFiles/knockout-3.4.1.js"></script>
+<script type="text/javascript" src="/Cookathon/knockoutJSFiles/knockout-3.4.1.js"></script>
+<script type="text/javascript" src="/Cookathon/bootstrapFiles/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/Cookathon/bootstrapFiles/js/bootstrap.min.js"></script>
+<script src="/Cookathon/jsFiles/main.js"></script>
 
 </body>
 </html>
