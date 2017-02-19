@@ -52,8 +52,13 @@
 </div>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12">
-			<h2>Add you Receipe Hee!!!</h2>
+		<div class="col-lg-6">
+			<!-- <div class="item" style="width:640px; height:60px;">
+					<img src="/Cookathon/images/Title Banner.png" alt="Banner_Cookathon" />
+					<div class="carousel-caption">
+						<h1 style="float: left;">Add you receipe Here</h1>
+					</div>
+				</div> -->
 				<form class="form" data-bind="submit: addReceipe">
 					<div class="form-group">
 						<label for="receipeAuthor">Name: </label>
@@ -68,8 +73,19 @@
 						<input type="text" name="receipeDescription" class="form-control" id="receipeDescription" data-bind="value : receipeDescription" />
 					</div>
 					<div class="form-group">
-						<label for="receipeIngredients">Ingredients: </label>
-						<textarea name="receipeIngredients" class="form-control" rows="5" id="receipeIngredients" data-bind="value : receipeIngredients"></textarea>
+						<label for="receipeIngredients">Ingredients: (Please use comma seperated values Eg: Chicken 1Kg, Rice 1/4Kg)</label>
+						<div class="input-group ">
+							<input type="text" name="receipeIngredients" class="form-control" id="receipeIngredients" data-bind="value : receipeIngredients" /> 
+							<span class="input-group-btn">
+								<button type="button" class="form-control btn btn-success" data-bind="click : addIngredients" value="Add">Add</button>
+							</span>
+						</div>
+						<p><b>Your Ingredients:</b></p>
+						<select class="form-control" multiple="multiple" data-bind="options:ingredients, selectedOptions:selectedingredients"> </select></br>
+							<button class="btn btn-danger" aligin="glyphicon-chevron-right" data-bind="click: removeSelectedingredients, enable: selectedingredients().length > 0">Remove</button>
+						<!-- <ul data-bind = "foreach: ingredients">
+							<li data-bind="text: ingredientValue"></li>
+						</ul> -->
 					</div>
 					<div class="form-group">
 						<label for="receipePreparation">Preparation: </label>
@@ -79,6 +95,11 @@
 						<input type="submit" class="btn btn-default bg-success" value="Add Your Receipe" id="receipeSubmit">
 					</div>
 				</form>
+		</div>
+		<div class="col-lg-6">
+			<div id="showReceipes">
+				<b>Recent receipes</b>
+			</div> 
 		</div>
 	</div>
 </div>
